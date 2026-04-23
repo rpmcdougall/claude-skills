@@ -1,0 +1,9 @@
+# Normalize all text files to LF in the repo.
+# Working-copy line endings still follow core.autocrlf locally.
+* text=auto eol=lf
+
+# Shell scripts must stay LF even on Windows — CRLF breaks them.
+*.sh text eol=lf
+
+# Markdown skills are read by Claude Code cross-platform; keep LF.
+*.md text eol=lf
