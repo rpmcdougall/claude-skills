@@ -92,13 +92,13 @@ if [[ $action == "list" ]]; then
   log "Installed skills in $target_dir:"
   shopt -s nullglob
   found=0
-  for f in "$target_dir"/*.md; do
+  for f in "$target_dir"/*/SKILL.md; do
     found=1
-    base="$(basename "$f")"
+    skill_name="$(basename "$(dirname "$f")")"
     if [[ -L "$f" ]]; then
-      echo "  $base -> $(readlink "$f")"
+      echo "  $skill_name -> $(readlink "$f")"
     else
-      echo "  $base (copy)"
+      echo "  $skill_name (copy)"
     fi
   done
   [[ $found -eq 0 ]] && echo "  (none)"
@@ -124,22 +124,22 @@ fi
 # --- Resolve a skill name to its source file ---
 resolve_source() {
   local name="$1"
-  # Strip .md suffix if provided
   name="${name%.md}"
   local skill_dir="$SKILLS_DIR/$name"
-  if [[ -f "$skill_dir/skill.md" ]]; then
-    echo "$skill_dir/skill.md"
+  if [[ -f "$skill_dir/SKILL.md" ]]; then
+    echo "$skill_dir/SKILL.md"
     return
   fi
-  die "could not resolve skill: $name (expected $skill_dir/skill.md)"
+  die "could not resolve skill: $name (expected $skill_dir/SKILL.md)"
 }
 
 install_one() {
   local name="$1"
   name="${name%.md}"
-  local src dest
+  local src dest_dir dest
   src=$(resolve_source "$name")
-  dest="$target_dir/${name}.md"
+  dest_dir="$target_dir/$name"
+  dest="$dest_dir/SKILL.md"
 
   if [[ -e "$dest" || -L "$dest" ]]; then
     if [[ $force -eq 1 ]]; then
@@ -150,26 +150,29 @@ install_one() {
     fi
   fi
 
+  run mkdir -p "\"$dest_dir\""
+
   if [[ $mode == "symlink" ]]; then
     if ! run ln -s "\"$src\"" "\"$dest\""; then
       die "symlink failed for $src → $dest (try --copy)"
     fi
-    log "linked: ${name}.md"
+    log "linked: $name/SKILL.md"
   else
     run cp "\"$src\"" "\"$dest\""
-    log "copied: ${name}.md"
+    log "copied: $name/SKILL.md"
   fi
 }
 
 uninstall_one() {
   local name="$1"
   name="${name%.md}"
-  local dest="$target_dir/${name}.md"
-  if [[ -e "$dest" || -L "$dest" ]]; then
-    run rm -f "\"$dest\""
-    log "removed: ${name}.md"
+  local dest_dir="$target_dir/$name"
+  if [[ -e "$dest_dir/SKILL.md" || -L "$dest_dir/SKILL.md" ]]; then
+    run rm -f "\"$dest_dir/SKILL.md\""
+    run rmdir "\"$dest_dir\"" 2>/dev/null || true
+    log "removed: $name"
   else
-    log "not installed: ${name}.md"
+    log "not installed: $name"
   fi
 }
 

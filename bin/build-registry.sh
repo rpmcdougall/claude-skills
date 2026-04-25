@@ -15,7 +15,7 @@ entries=()
 for manifest in "$SKILLS_DIR"/*/manifest.json; do
   [[ -f "$manifest" ]] || continue
   dir="$(basename "$(dirname "$manifest")")"
-  entry=$(jq --arg path "skills/$dir/skill.md" '. + {path: $path}' "$manifest")
+  entry=$(jq --arg path "skills/$dir/SKILL.md" '. + {path: $path}' "$manifest")
   entries+=("$entry")
 done
 

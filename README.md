@@ -9,7 +9,7 @@ Each skill lives in its own directory under `skills/`, with a standardized struc
 ```
 skills/<name>/
 ├── manifest.json   ← metadata (description, group, tags, version)
-└── skill.md        ← the skill itself (YAML frontmatter + Markdown body)
+└── SKILL.md        ← the skill itself (YAML frontmatter + Markdown body)
 ```
 
 The full repo:
@@ -121,7 +121,7 @@ After install, restart Claude Code (or start a new session) so the skill is pick
 ## Authoring a new skill
 
 1. Create `skills/<name>/` with the skill name in kebab-case.
-2. Write `skill.md` with YAML frontmatter (`name`, `description`) + body. Keep the body prescriptive, not explanatory.
+2. Write `SKILL.md` with YAML frontmatter (`name`, `description`) + body. Keep the body prescriptive, not explanatory.
 3. Write `manifest.json` with `name`, `description` (short browsable summary), `group`, `tags`, and `version`.
 4. Make the frontmatter `description` rich in trigger phrases — that's what Claude matches against.
 5. Include a `## Rules` block for constraints that aren't obvious from the instructions.

@@ -11,7 +11,7 @@
         "quality"
       ],
       "version": "1.0.0",
-      "path": "skills/adversarial-code-reviewer/skill.md"
+      "path": "skills/adversarial-code-reviewer/SKILL.md"
     },
     {
       "name": "agile-project-manager",
@@ -24,7 +24,7 @@
         "project-management"
       ],
       "version": "1.0.0",
-      "path": "skills/agile-project-manager/skill.md"
+      "path": "skills/agile-project-manager/SKILL.md"
     },
     {
       "name": "checkpoint",
@@ -36,7 +36,7 @@
         "workflow"
       ],
       "version": "1.0.0",
-      "path": "skills/checkpoint/skill.md"
+      "path": "skills/checkpoint/SKILL.md"
     },
     {
       "name": "combat-dice-budget",
@@ -48,7 +48,7 @@
         "combat"
       ],
       "version": "1.0.0",
-      "path": "skills/combat-dice-budget/skill.md"
+      "path": "skills/combat-dice-budget/SKILL.md"
     },
     {
       "name": "engine-feature-scope",
@@ -60,7 +60,7 @@
         "scoping"
       ],
       "version": "1.0.0",
-      "path": "skills/engine-feature-scope/skill.md"
+      "path": "skills/engine-feature-scope/SKILL.md"
     },
     {
       "name": "engine-tests",
@@ -72,7 +72,7 @@
         "ci"
       ],
       "version": "1.0.0",
-      "path": "skills/engine-tests/skill.md"
+      "path": "skills/engine-tests/SKILL.md"
     },
     {
       "name": "file-issue",
@@ -84,7 +84,7 @@
         "issues"
       ],
       "version": "1.0.0",
-      "path": "skills/file-issue/skill.md"
+      "path": "skills/file-issue/SKILL.md"
     },
     {
       "name": "godot-repl",
@@ -96,7 +96,7 @@
         "repl"
       ],
       "version": "1.0.0",
-      "path": "skills/godot-repl/skill.md"
+      "path": "skills/godot-repl/SKILL.md"
     },
     {
       "name": "post-merge",
@@ -108,7 +108,7 @@
         "cleanup"
       ],
       "version": "1.0.0",
-      "path": "skills/post-merge/skill.md"
+      "path": "skills/post-merge/SKILL.md"
     },
     {
       "name": "pre-merge-housekeeping",
@@ -121,7 +121,7 @@
         "pr"
       ],
       "version": "1.0.0",
-      "path": "skills/pre-merge-housekeeping/skill.md"
+      "path": "skills/pre-merge-housekeeping/SKILL.md"
     },
     {
       "name": "ruleset-diff-audit",
@@ -133,7 +133,7 @@
         "compliance"
       ],
       "version": "1.0.0",
-      "path": "skills/ruleset-diff-audit/skill.md"
+      "path": "skills/ruleset-diff-audit/SKILL.md"
     },
     {
       "name": "senior-software-engineer",
@@ -146,7 +146,7 @@
         "mentoring"
       ],
       "version": "1.0.0",
-      "path": "skills/senior-software-engineer/skill.md"
+      "path": "skills/senior-software-engineer/SKILL.md"
     },
     {
       "name": "sql-explainer",
@@ -160,7 +160,7 @@
         "databricks"
       ],
       "version": "1.0.0",
-      "path": "skills/sql-explainer/skill.md"
+      "path": "skills/sql-explainer/SKILL.md"
     },
     {
       "name": "v17-rule",
@@ -172,7 +172,7 @@
         "reference"
       ],
       "version": "1.0.0",
-      "path": "skills/v17-rule/skill.md"
+      "path": "skills/v17-rule/SKILL.md"
     }
   ]
 }
