@@ -1,0 +1,7 @@
+{
+  "name": "combat-dice-budget",
+  "description": "Calculate worst-case dice pools for combat engagements",
+  "group": "turnipsim",
+  "tags": ["game-design", "math", "combat"],
+  "version": "1.0.0"
+}

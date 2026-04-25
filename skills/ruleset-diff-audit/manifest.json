@@ -1,0 +1,7 @@
+{
+  "name": "ruleset-diff-audit",
+  "description": "Audit engine compliance against ruleset PDFs",
+  "group": "turnipsim",
+  "tags": ["game-design", "audit", "compliance"],
+  "version": "1.0.0"
+}

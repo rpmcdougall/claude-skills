@@ -1,0 +1,7 @@
+{
+  "name": "file-issue",
+  "description": "Create GitHub issue via template",
+  "group": "turnipsim",
+  "tags": ["github", "workflow", "issues"],
+  "version": "1.0.0"
+}

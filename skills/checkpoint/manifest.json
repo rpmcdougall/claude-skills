@@ -1,0 +1,7 @@
+{
+  "name": "checkpoint",
+  "description": "Generate session checkpoint with summary and next steps",
+  "group": "turnipsim",
+  "tags": ["git", "docs", "workflow"],
+  "version": "1.0.0"
+}

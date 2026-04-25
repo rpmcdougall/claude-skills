@@ -1,0 +1,178 @@
+{
+  "skills": [
+    {
+      "name": "adversarial-code-reviewer",
+      "description": "Hostile code review focused on bugs, security holes, and edge cases",
+      "group": "roles",
+      "tags": [
+        "role",
+        "code-review",
+        "security",
+        "quality"
+      ],
+      "version": "1.0.0",
+      "path": "skills/adversarial-code-reviewer/skill.md"
+    },
+    {
+      "name": "agile-project-manager",
+      "description": "Agile PM for sprint planning, story writing, and backlog management",
+      "group": "roles",
+      "tags": [
+        "role",
+        "agile",
+        "planning",
+        "project-management"
+      ],
+      "version": "1.0.0",
+      "path": "skills/agile-project-manager/skill.md"
+    },
+    {
+      "name": "checkpoint",
+      "description": "Generate session checkpoint with summary and next steps",
+      "group": "turnipsim",
+      "tags": [
+        "git",
+        "docs",
+        "workflow"
+      ],
+      "version": "1.0.0",
+      "path": "skills/checkpoint/skill.md"
+    },
+    {
+      "name": "combat-dice-budget",
+      "description": "Calculate worst-case dice pools for combat engagements",
+      "group": "turnipsim",
+      "tags": [
+        "game-design",
+        "math",
+        "combat"
+      ],
+      "version": "1.0.0",
+      "path": "skills/combat-dice-budget/skill.md"
+    },
+    {
+      "name": "engine-feature-scope",
+      "description": "Scope new engine mechanics with requirements analysis",
+      "group": "turnipsim",
+      "tags": [
+        "planning",
+        "game-engine",
+        "scoping"
+      ],
+      "version": "1.0.0",
+      "path": "skills/engine-feature-scope/skill.md"
+    },
+    {
+      "name": "engine-tests",
+      "description": "Run Godot headless test suites",
+      "group": "turnipsim",
+      "tags": [
+        "testing",
+        "godot",
+        "ci"
+      ],
+      "version": "1.0.0",
+      "path": "skills/engine-tests/skill.md"
+    },
+    {
+      "name": "file-issue",
+      "description": "Create GitHub issue via template",
+      "group": "turnipsim",
+      "tags": [
+        "github",
+        "workflow",
+        "issues"
+      ],
+      "version": "1.0.0",
+      "path": "skills/file-issue/skill.md"
+    },
+    {
+      "name": "godot-repl",
+      "description": "Execute throwaway GDScript snippets for verification",
+      "group": "turnipsim",
+      "tags": [
+        "godot",
+        "debugging",
+        "repl"
+      ],
+      "version": "1.0.0",
+      "path": "skills/godot-repl/skill.md"
+    },
+    {
+      "name": "post-merge",
+      "description": "Sync main, cleanup, suggest next issue",
+      "group": "turnipsim",
+      "tags": [
+        "git",
+        "workflow",
+        "cleanup"
+      ],
+      "version": "1.0.0",
+      "path": "skills/post-merge/skill.md"
+    },
+    {
+      "name": "pre-merge-housekeeping",
+      "description": "Bundle checkpoint, wiki, and docs before PR merge",
+      "group": "turnipsim",
+      "tags": [
+        "git",
+        "docs",
+        "workflow",
+        "pr"
+      ],
+      "version": "1.0.0",
+      "path": "skills/pre-merge-housekeeping/skill.md"
+    },
+    {
+      "name": "ruleset-diff-audit",
+      "description": "Audit engine compliance against ruleset PDFs",
+      "group": "turnipsim",
+      "tags": [
+        "game-design",
+        "audit",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "path": "skills/ruleset-diff-audit/skill.md"
+    },
+    {
+      "name": "senior-software-engineer",
+      "description": "Adopt a senior SWE perspective for architecture, code quality, and mentoring",
+      "group": "roles",
+      "tags": [
+        "role",
+        "architecture",
+        "code-quality",
+        "mentoring"
+      ],
+      "version": "1.0.0",
+      "path": "skills/senior-software-engineer/skill.md"
+    },
+    {
+      "name": "sql-explainer",
+      "description": "Layered SQL query explainer for Snowflake, Oracle, and Databricks",
+      "group": "sql",
+      "tags": [
+        "sql",
+        "learning",
+        "snowflake",
+        "oracle",
+        "databricks"
+      ],
+      "version": "1.0.0",
+      "path": "skills/sql-explainer/skill.md"
+    },
+    {
+      "name": "v17-rule",
+      "description": "Search ruleset text with citations and page numbers",
+      "group": "turnipsim",
+      "tags": [
+        "game-design",
+        "rules",
+        "reference"
+      ],
+      "version": "1.0.0",
+      "path": "skills/v17-rule/skill.md"
+    }
+  ]
+}

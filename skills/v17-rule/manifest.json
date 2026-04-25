@@ -1,0 +1,7 @@
+{
+  "name": "v17-rule",
+  "description": "Search ruleset text with citations and page numbers",
+  "group": "turnipsim",
+  "tags": ["game-design", "rules", "reference"],
+  "version": "1.0.0"
+}

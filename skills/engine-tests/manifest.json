@@ -1,0 +1,7 @@
+{
+  "name": "engine-tests",
+  "description": "Run Godot headless test suites",
+  "group": "turnipsim",
+  "tags": ["testing", "godot", "ci"],
+  "version": "1.0.0"
+}

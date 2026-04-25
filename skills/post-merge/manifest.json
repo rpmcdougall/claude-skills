@@ -1,0 +1,7 @@
+{
+  "name": "post-merge",
+  "description": "Sync main, cleanup, suggest next issue",
+  "group": "turnipsim",
+  "tags": ["git", "workflow", "cleanup"],
+  "version": "1.0.0"
+}

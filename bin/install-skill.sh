@@ -2,14 +2,14 @@
 # install-skill.sh — install skill(s) from this repo into a Claude Code skills dir.
 #
 # Usage:
-#   bin/install-skill.sh <skill-or-dir>... [--project PATH] [--copy] [--dry-run] [--force]
+#   bin/install-skill.sh <name>...   [--project PATH] [--copy] [--dry-run] [--force]
+#   bin/install-skill.sh --group <g> [--project PATH] [--copy] [--dry-run] [--force]
+#   bin/install-skill.sh --tag <t>   [--project PATH] [--copy] [--dry-run] [--force]
 #   bin/install-skill.sh --uninstall <name>... [--project PATH] [--dry-run]
-#   bin/install-skill.sh --list [--project PATH]
+#   bin/install-skill.sh --list      [--project PATH]
+#   bin/install-skill.sh --available [--group <g>] [--tag <t>]
 #
-# <skill-or-dir> may be:
-#   - a skill name           e.g.  checkpoint
-#   - a path relative to repo e.g.  turnipsim/checkpoint.md
-#   - a group directory      e.g.  turnipsim         (installs every *.md inside)
+# <name> is the skill package name (directory name under skills/).
 #
 # Default target is ~/.claude/skills/ (global).
 # With --project PATH, installs to PATH/.claude/skills/ instead.
@@ -20,12 +20,15 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SKILLS_DIR="$REPO_ROOT/skills"
 
 target_dir="$HOME/.claude/skills"
 mode="symlink"
 dry_run=0
 force=0
 action="install"
+filter_group=""
+filter_tag=""
 targets=()
 
 die() { echo "error: $*" >&2; exit 1; }
@@ -39,11 +42,22 @@ while [[ $# -gt 0 ]]; do
       target_dir="$(cd "$2" && pwd)/.claude/skills"
       shift 2
       ;;
-    --copy)    mode="copy"; shift ;;
-    --dry-run) dry_run=1; shift ;;
-    --force)   force=1; shift ;;
+    --group)
+      [[ $# -ge 2 ]] || die "--group requires a name"
+      filter_group="$2"
+      shift 2
+      ;;
+    --tag)
+      [[ $# -ge 2 ]] || die "--tag requires a value"
+      filter_tag="$2"
+      shift 2
+      ;;
+    --copy)      mode="copy"; shift ;;
+    --dry-run)   dry_run=1; shift ;;
+    --force)     force=1; shift ;;
     --uninstall) action="uninstall"; shift ;;
-    --list)    action="list"; shift ;;
+    --list)      action="list"; shift ;;
+    --available) action="available"; shift ;;
     -h|--help)
       sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'
       exit 0
@@ -53,6 +67,25 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# --- Available: list skills from manifests ---
+if [[ $action == "available" ]]; then
+  log "Available skills in $SKILLS_DIR:"
+  for manifest in "$SKILLS_DIR"/*/manifest.json; do
+    [[ -f "$manifest" ]] || continue
+    name=$(jq -r '.name' "$manifest")
+    desc=$(jq -r '.description' "$manifest")
+    group=$(jq -r '.group' "$manifest")
+    tags=$(jq -r '.tags // [] | join(", ")' "$manifest")
+
+    if [[ -n "$filter_group" && "$group" != "$filter_group" ]]; then continue; fi
+    if [[ -n "$filter_tag" ]] && ! jq -e --arg t "$filter_tag" '.tags // [] | index($t)' "$manifest" &>/dev/null; then continue; fi
+
+    printf "  %-28s %s\n" "$name [$group]" "$desc"
+  done
+  exit 0
+fi
+
+# --- List installed ---
 mkdir -p "$target_dir"
 
 if [[ $action == "list" ]]; then
@@ -72,40 +105,41 @@ if [[ $action == "list" ]]; then
   exit 0
 fi
 
+# --- Resolve targets from --group / --tag if no explicit names ---
+if [[ ${#targets[@]} -eq 0 ]]; then
+  if [[ -n "$filter_group" || -n "$filter_tag" ]]; then
+    for manifest in "$SKILLS_DIR"/*/manifest.json; do
+      [[ -f "$manifest" ]] || continue
+      name=$(jq -r '.name' "$manifest")
+      group=$(jq -r '.group' "$manifest")
+      if [[ -n "$filter_group" && "$group" != "$filter_group" ]]; then continue; fi
+      if [[ -n "$filter_tag" ]] && ! jq -e --arg t "$filter_tag" '.tags // [] | index($t)' "$manifest" &>/dev/null; then continue; fi
+      targets+=("$name")
+    done
+  fi
+fi
+
 [[ ${#targets[@]} -gt 0 ]] || die "no skills specified. See --help."
 
-# Expand each target into a list of source .md files.
-resolve_sources() {
-  local t="$1"
-  # Absolute or repo-relative path to a .md file
-  if [[ -f "$REPO_ROOT/$t" ]]; then
-    echo "$REPO_ROOT/$t"; return
-  fi
-  if [[ -f "$t" ]]; then
-    local d b
-    d="$(cd "$(dirname "$t")" && pwd)"
-    b="$(basename "$t")"
-    echo "$d/$b"; return
-  fi
-  # Group directory (e.g. "turnipsim")
-  if [[ -d "$REPO_ROOT/$t" ]]; then
-    find "$REPO_ROOT/$t" -maxdepth 1 -name '*.md' -not -name 'README.md' | sort
+# --- Resolve a skill name to its source file ---
+resolve_source() {
+  local name="$1"
+  # Strip .md suffix if provided
+  name="${name%.md}"
+  local skill_dir="$SKILLS_DIR/$name"
+  if [[ -f "$skill_dir/skill.md" ]]; then
+    echo "$skill_dir/skill.md"
     return
   fi
-  # Bare skill name — search the repo for <name>.md
-  local found
-  found=$(find "$REPO_ROOT" -maxdepth 3 -name "${t}.md" -not -path '*/doc/*' -not -name 'README.md' | sort)
-  if [[ -n "$found" ]]; then
-    echo "$found"; return
-  fi
-  die "could not resolve skill: $t"
+  die "could not resolve skill: $name (expected $skill_dir/skill.md)"
 }
 
 install_one() {
-  local src="$1"
-  local base dest
-  base="$(basename "$src")"
-  dest="$target_dir/$base"
+  local name="$1"
+  name="${name%.md}"
+  local src dest
+  src=$(resolve_source "$name")
+  dest="$target_dir/${name}.md"
 
   if [[ -e "$dest" || -L "$dest" ]]; then
     if [[ $force -eq 1 ]]; then
@@ -120,22 +154,22 @@ install_one() {
     if ! run ln -s "\"$src\"" "\"$dest\""; then
       die "symlink failed for $src → $dest (try --copy)"
     fi
-    log "linked: $base"
+    log "linked: ${name}.md"
   else
     run cp "\"$src\"" "\"$dest\""
-    log "copied: $base"
+    log "copied: ${name}.md"
   fi
 }
 
 uninstall_one() {
   local name="$1"
-  [[ "$name" == *.md ]] || name="${name}.md"
-  local dest="$target_dir/$name"
+  name="${name%.md}"
+  local dest="$target_dir/${name}.md"
   if [[ -e "$dest" || -L "$dest" ]]; then
     run rm -f "\"$dest\""
-    log "removed: $name"
+    log "removed: ${name}.md"
   else
-    log "not installed: $name"
+    log "not installed: ${name}.md"
   fi
 }
 
@@ -143,9 +177,7 @@ for t in "${targets[@]}"; do
   if [[ $action == "uninstall" ]]; then
     uninstall_one "$t"
   else
-    while IFS= read -r src; do
-      [[ -n "$src" ]] && install_one "$src"
-    done < <(resolve_sources "$t")
+    install_one "$t"
   fi
 done
 

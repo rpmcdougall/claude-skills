@@ -1,0 +1,7 @@
+{
+  "name": "adversarial-code-reviewer",
+  "description": "Hostile code review focused on bugs, security holes, and edge cases",
+  "group": "roles",
+  "tags": ["role", "code-review", "security", "quality"],
+  "version": "1.0.0"
+}

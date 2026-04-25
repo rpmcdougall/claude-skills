@@ -1,0 +1,7 @@
+{
+  "name": "agile-project-manager",
+  "description": "Agile PM for sprint planning, story writing, and backlog management",
+  "group": "roles",
+  "tags": ["role", "agile", "planning", "project-management"],
+  "version": "1.0.0"
+}

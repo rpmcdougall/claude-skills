@@ -1,0 +1,7 @@
+{
+  "name": "engine-feature-scope",
+  "description": "Scope new engine mechanics with requirements analysis",
+  "group": "turnipsim",
+  "tags": ["planning", "game-engine", "scoping"],
+  "version": "1.0.0"
+}

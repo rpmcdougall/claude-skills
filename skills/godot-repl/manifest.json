@@ -1,0 +1,7 @@
+{
+  "name": "godot-repl",
+  "description": "Execute throwaway GDScript snippets for verification",
+  "group": "turnipsim",
+  "tags": ["godot", "debugging", "repl"],
+  "version": "1.0.0"
+}

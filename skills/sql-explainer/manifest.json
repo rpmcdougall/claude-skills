@@ -1,0 +1,7 @@
+{
+  "name": "sql-explainer",
+  "description": "Layered SQL query explainer for Snowflake, Oracle, and Databricks",
+  "group": "sql",
+  "tags": ["sql", "learning", "snowflake", "oracle", "databricks"],
+  "version": "1.0.0"
+}

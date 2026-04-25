@@ -1,0 +1,7 @@
+{
+  "name": "senior-software-engineer",
+  "description": "Adopt a senior SWE perspective for architecture, code quality, and mentoring",
+  "group": "roles",
+  "tags": ["role", "architecture", "code-quality", "mentoring"],
+  "version": "1.0.0"
+}

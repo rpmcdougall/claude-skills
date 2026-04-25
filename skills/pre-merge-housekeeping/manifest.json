@@ -1,0 +1,7 @@
+{
+  "name": "pre-merge-housekeeping",
+  "description": "Bundle checkpoint, wiki, and docs before PR merge",
+  "group": "turnipsim",
+  "tags": ["git", "docs", "workflow", "pr"],
+  "version": "1.0.0"
+}
